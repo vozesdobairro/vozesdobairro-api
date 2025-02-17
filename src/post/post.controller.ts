@@ -32,14 +32,19 @@ export class PostController {
     return this.postService.fetchPosts();
   }
 
+  @Get(':id')
+  async fetchPostById(@Param('id') id: string) {
+    return this.postService.fetchPostById(+id);
+  }
+
   @Put(':id')
   @UseInterceptors(FileInterceptor('image'))
   async updatePost(
     @Param('id') id: string,
     @Body() updatePostDto: UpdatePostDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() image: Express.Multer.File,
   ) {
-    return this.postService.updatePosts(+id, updatePostDto, file);
+    return this.postService.updatePosts(+id, updatePostDto, image);
   }
 
   @Delete(':id')

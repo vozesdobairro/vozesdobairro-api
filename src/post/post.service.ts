@@ -41,10 +41,22 @@ export class PostService {
     const imageUrl = file ? await this.uploadImage(file) : null;
     const titulo = createPostDto.titulo;
     const texto = createPostDto.texto;
+    const subtitulo = createPostDto.subtitulo;
+    const minutos = createPostDto.minutos;
+    const criado_aos = createPostDto.criado_aos;
 
     const { data, error } = await this.supabase
       .from('artigo')
-      .insert([{ titulo, texto, caminho_imagem: imageUrl }])
+      .insert([
+        {
+          titulo,
+          texto,
+          subtitulo,
+          minutos,
+          criado_aos,
+          caminho_imagem: imageUrl,
+        },
+      ])
       .select();
 
     if (error) {
@@ -67,6 +79,20 @@ export class PostService {
     return data;
   }
 
+  async fetchPostById(id: number) {
+    const { data, error } = await this.supabase
+      .from('artigo')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      throw new BadRequestException(`Erro ao buscar artigo: ${error.message}`);
+    }
+
+    return data;
+  }
+
   async updatePosts(
     id: number,
     updatePostDto: UpdatePostDto,
@@ -75,10 +101,22 @@ export class PostService {
     const imageUrl = file ? await this.uploadImage(file) : null;
     const titulo = updatePostDto.titulo;
     const texto = updatePostDto.texto;
+    const subtitulo = updatePostDto.subtitulo;
+    const minutos = updatePostDto.minutos;
+    const criado_aos = updatePostDto.criado_aos;
 
     const { data, error } = await this.supabase
       .from('artigo')
-      .update([{ titulo, texto, caminho_imagem: imageUrl }])
+      .update([
+        {
+          titulo,
+          texto,
+          subtitulo,
+          minutos,
+          criado_aos,
+          caminho_imagem: imageUrl,
+        },
+      ])
       .eq('id', id)
       .select();
 

@@ -21,10 +21,11 @@ export class GalleryController {
   @Post()
   @UseInterceptors(FileInterceptor('image'))
   async addPhoto(
-    @Body() createPostDto: CreateGalleryDto,
-    @UploadedFile() file: Express.Multer.File,
+    @Body() createGalleryDto: CreateGalleryDto,
+    @UploadedFile() image: Express.Multer.File,
   ) {
-    return this.galleryService.addPhoto(createPostDto, file);
+
+    return this.galleryService.addPhoto(createGalleryDto, image);
   }
 
   @Get()
@@ -37,9 +38,9 @@ export class GalleryController {
   async updatePhoto(
     @Param('id') id: string,
     @Body() updatePostDto: UpdateGalleryDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() image: Express.Multer.File,
   ) {
-    return this.galleryService.updatePhotos(+id, updatePostDto, file);
+    return this.galleryService.updatePhotos(+id, updatePostDto, image);
   }
 
   @Delete(':id')
