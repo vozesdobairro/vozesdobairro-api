@@ -8,6 +8,7 @@ import {
   Param,
   UploadedFile,
   UseInterceptors,
+  Patch,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -37,7 +38,7 @@ export class PostController {
     return this.postService.fetchPostById(+id);
   }
 
-  @Put(':id')
+  @Patch(':id')
   @UseInterceptors(FileInterceptor('image'))
   async updatePost(
     @Param('id') id: string,
