@@ -43,9 +43,9 @@ export class PostController {
   async updatePost(
     @Param('id') id: string,
     @Body() updatePostDto: UpdatePostDto,
-    @UploadedFile() image: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File,
   ) {
-    return this.postService.updatePosts(+id, updatePostDto, image);
+    return this.postService.updatePosts(+id, updatePostDto, file);
   }
 
   @Delete(':id')
