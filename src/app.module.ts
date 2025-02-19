@@ -9,6 +9,7 @@ import { GalleryModule } from './gallery/gallery.module';
 //import { PrismaService } from './prisma/prisma.service';
 import { ConfigModule } from '@nestjs/config';
 import { WiseModule } from './wise/wise.module';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [
@@ -19,6 +20,6 @@ import { WiseModule } from './wise/wise.module';
     WiseModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}

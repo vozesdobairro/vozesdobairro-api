@@ -4,4 +4,5 @@ export class CreatePostDto {
   subtitulo: string;
   minutos: string;
   criado_aos: string;
+  caminho_imagem?: string;
 }

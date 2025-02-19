@@ -98,7 +98,9 @@ export class PostService {
     updatePostDto: UpdatePostDto,
     file: Express.Multer.File,
   ) {
-    const imageUrl = file ? await this.uploadImage(file) : null;
+    const imageUrl = file
+      ? await this.uploadImage(file)
+      : updatePostDto.caminho_imagem;
     const titulo = updatePostDto.titulo;
     const texto = updatePostDto.texto;
     const subtitulo = updatePostDto.subtitulo;

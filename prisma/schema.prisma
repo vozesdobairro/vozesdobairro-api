@@ -12,3 +12,21 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Usuario {
+  id             String        @id @default(cuid())
+  nome           String
+  email          String        @unique
+  hash           String
+  hashedRt       String?
+  status         StatusUsuario @default(ATIVO)
+  criado_aos     DateTime      @default(now())
+  atualizado_aos DateTime      @updatedAt
+}
+
+
+enum StatusUsuario {
+  ATIVO
+  INATIVO
+}
